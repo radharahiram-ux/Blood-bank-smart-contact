@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BloodBank | Blockchain Managed</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/ethers@6.11.1/dist/ethers.umd.min.js"></script>
+</head>
+<body>
+    <div class="dashboard">
+        <header>
+            <div class="logo">🩸 BloodBank</div>
+            <div id="walletStatus">Not Connected</div>
+        </header>
+
+        <section class="stats-grid">
+            <div class="card">
+                <h3>Total Patients</h3>
+                <p id="totalPatients">0</p>
+            </div>
+            <div class="card">
+                <h3>Recent Activity</h3>
+                <p id="recentActivity">None</p>
+            </div>
+        </section>
+
+        <section class="glass-pane">
+            <h2>Register New Patient</h2>
+            <form id="patientForm">
+                <div class="form-group">
+                    <label>Aadhaar Number</label>
+                    <input type="number" id="aadhar" required>
+                </div>
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label>Age</label>
+                    <input type="number" id="age" required>
+                </div>
+                <div class="form-group">
+                    <label>Blood Group</label>
+                    <select id="bloodGroup">
+                        <option>A+</option><option>A-</option>
+                        <option>B+</option><option>B-</option>
+                        <option>AB+</option><option>AB-</option>
+                        <option>O+</option><option>O-</option>
+                    </select>
+                </div>
+                <button type="submit">Register Patient</button>
+            </form>
+        </section>
+
+        <section class="glass-pane" style="margin-top: 2rem;">
+            <h2>Fetch Patient Record</h2>
+            <div class="form-group">
+                <input type="number" id="searchAadhar" placeholder="Enter Aadhaar">
+                <button onclick="fetchRecord()" style="margin-top: 1rem;">Fetch</button>
+            </div>
+            <div id="recordDisplay"></div>
+        </section>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>

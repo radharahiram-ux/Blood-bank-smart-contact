@@ -1,0 +1,20 @@
+# Hardhat
+artifacts/
+cache/
+typechain/
+typechain-types/
+coverage/
+coverage.json
+contracts/hardhat-network/
+.openzeppelin/
+
+# Dependencies
+node_modules/
+package-lock.json
+
+# Environment
+.env
+
+# Misc
+.DS_Store
+*.log
