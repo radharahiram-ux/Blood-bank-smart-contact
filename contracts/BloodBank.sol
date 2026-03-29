@@ -2,12 +2,73 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity ^0.8.0;
 
-import "./BloodBankTypes.sol";
-import "./IBloodBank.sol";
+/**
+ * @title BloodBankTypes
+ * @dev Defines the common enums and structs for the BloodBank system.
+ */
+library BloodBankTypes {
+    // Used for defining PatientType
+    enum PatientType {
+        Donor,
+        Receiver
+    }
+
+    // Used to storing blood txn
+    struct BloodTransaction {
+        PatientType patientType;
+        uint256 time;
+        address from;
+        address to;
+    }
+
+    // Used for storing single Patient records
+    struct Patient {
+        uint256 aadhar;
+        string name;
+        uint256 age;
+        string bloodGroup;
+        uint256 contact;
+        string homeAddress;
+        BloodTransaction[] bT;
+    }
+}
+
+/**
+ * @title IBloodBank
+ * @dev Interface for the BloodBank contract logic.
+ */
+interface IBloodBank {
+    // used for notifying if function is executed or not
+    event Successfull(string message);
+
+    // Register a new patient
+    function newPatient(
+        string calldata _name,
+        uint256 _age,
+        string calldata _bloodGroup,
+        uint256 _contact,
+        string calldata _homeAddress,
+        uint256 _aadhar
+    ) external;
+
+    // function to get specific user data
+    function getPatientRecord(uint256 _aadhar) external view returns (BloodBankTypes.Patient memory);
+
+    // store the blood txn
+    function bloodTransaction(
+        uint256 _aadhar,
+        BloodBankTypes.PatientType _type,
+        address _from,
+        address _to
+    ) external;
+
+    // Admin-only function to fetch all patient records
+    function getAllRecord() external view returns (BloodBankTypes.Patient[] memory);
+}
 
 /**
  * @title BloodBank
- * @dev Implementation of the BloodBank contract using modular types and interfaces.
+ * @dev Implementation of the BloodBank contract using internal types and interfaces.
  */
 contract BloodBank is IBloodBank {
     // set the owner of the contract
